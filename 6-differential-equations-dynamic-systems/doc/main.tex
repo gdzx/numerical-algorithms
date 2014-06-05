@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{amsmath, amssymb}
+\usepackage[french]{varioref}
+\usepackage{geometry}
+\usepackage[toc, page]{appendix}
+\usepackage{vmargin}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{xfrac}
+\usepackage{caption}
+\usepackage{subcaption}
+
+%%%%%%%%%%%%%%%% Lengths %%%%%%%%%%%%%%%%
+
+\setmarginsrb{80pt}{60pt}{80pt}{60pt}{10pt}{10pt}{40pt}{40pt}
+%% \setlength{\textwidth}{17cm}
+%% \setlength{\evensidemargin}{0.2cm}
+%% \setlength{\oddsidemargin}{0.2cm}
+
+%%%%%%%%%%%%%%%% Variables %%%%%%%%%%%%%%%%
+\def\projet{5}
+\def\titre{Résolution approchée d'équations différentielles \rule{\linewidth}{.5pt}  Modélisation de systèmes dynamiques }
+\def\groupe{1}
+\def\equipe{2}
+
+%%%%%%%%%%%%%%% Autres %%%%%%%%%%%%%%%%%%%%
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[L]{Algorithmique Numérique}
+\fancyhead[R]{Projet n°6}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[L]{\textsc{Enseirb-Matmeca}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\textsc{Informatique-1A}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%% Header %%%%%%%%%%%%%%%%
+\noindent\begin{minipage}{0.98\textwidth}
+  \vskip 0mm
+  \noindent
+  { \begin{tabular}{p{7.5cm}}
+      {\bfseries \sffamily
+        Projet n°\projet} \\\\ 
+      {\itshape \titre}
+    \end{tabular}}
+  \hfill 
+  \fbox{\begin{tabular}{l}
+      {~\hfill \bfseries \sffamily Groupe n°\groupe\ - \'Equipe n°\equipe
+        \hfill~} \\[2mm] 
+      Responsable : \responsible \\
+      Secrétaire : \secretary \\
+      Codeurs : \others
+    \end{tabular}}
+  \vskip 4mm ~
+
+  ~~~\parbox{0.95\textwidth}{\small \textit{Résumé~:} \sffamily Ce
+  projet a pour but de mettre en place des méthodes résolution numériques d'équations différentielles afin de pouvoir les comparer et les appliquer sur des problèmes physiques concrets. L'intérêt réside dans le fait que ces problèmes sont régis par équation dont il existe une solution analytique, ce qui nous permettra d'évaluer l'éfficacité de nos méthodes de résolution. }
+  \vskip 1mm ~
+\end{minipage}
+
+%%%%%%%%%%%%%%%% Main part %%%%%%%%%%%%%%%%
+\input{methodes_resolution.tex}
+\input{proie_predateur.tex}
+\input{trois_corps.tex}
+\input{conclusion.tex}
+\end{document}

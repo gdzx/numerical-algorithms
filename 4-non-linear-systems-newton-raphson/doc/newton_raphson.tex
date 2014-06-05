@@ -1,0 +1,81 @@
+%----------------------------------------------------------------------------------------
+%   NEWTON-RAPHSON
+%----------------------------------------------------------------------------------------
+
+\section{Newton-Raphson Method}
+\subsection{Simple Newton-Raphson Algorithm}
+
+Let $f:\mathbb{R}^{n}\rightarrow \mathbb{R}^{m}$ be a function that is differentiable along both dimentions. $f$ and its derivatives are defined as following:
+\[f: 
+\begin{pmatrix}
+    x_1\\
+    \vdots\\
+    x_N
+  \end{pmatrix} 
+  \rightarrow
+  \begin{pmatrix}
+    f_1(x_1,...,X_N)\\
+    \vdots\\
+    f_N(x_1,...,x_N)
+  \end{pmatrix},\ 
+  H: \begin{pmatrix}
+    x_1\\
+    \vdots\\
+    x_N
+  \end{pmatrix}
+  \rightarrow
+  \begin{pmatrix}
+    \frac{\partial f_i(x_1,...,x_N)}{\partial x_j}
+  \end{pmatrix}_{i \in [1,N], j \in[1,N]},
+\]
+where $H$ is the Jacobian matrix of $f$. 
+
+The Newton-Raphson method tries to solve the equation $f(U) = 0$. It assumes that given a current position $U$, the best direction leading to a root of the function is the direction given by the slope of $f$ at $U$.
+
+Let $U$ be an initial position chosen arbitrary. The algorithm looks for a point $V$ such that:
+\[
+f(U+V) = 0
+\]
+And
+\begin{equation}
+f(U+V) = f(U) + H(U).V
+\label{eq:equation1}
+\end{equation}
+It is easy to notice that:
+\begin{equation}
+f(U) + H(U).V = 0
+\label{eq:equation2}
+\end{equation}
+
+Then, $U$ is replaced by $U+V$, and the process is repeated until either $U$ converges or a maximum number of iterations is reached. The Taylor approximation in Equation~\vref{eq:equation1} ensures that we are looking for the root in the direction of the slope. However, no guarantee is given that the point reached at the end of this direction is minimizing the function $f$.
+
+This is why the Newton-Raphson method has an unfortunate tendency to diverge if the initial guess is not sufficiently close to the root.   
+
+\subsection{Backtracking}
+A global method is a one that converges to a solution from almost any starting point. In this section we will develop an algorithm called backtracking that combines the rapid superlinear speed of convergence of Newton's method, with a globally convergent strategy that will guarantee some progress towards the solution at each iteration. In other words, at each step of the algorithm, the next point given by Equation~\vref{eq:equation2} is only chosen if it minimizes the function. Figure~\vref{fig:backtracking} shows the full algorithm.
+
+The complexity of the algorithm is $\Theta(N x c)$ - $c$ is the complexity of the function solve.
+
+\begin{figure}[ht]
+  \centering
+  \begin{algorithm}[H]
+    \KwData{$f$: a function, $H$: the jacobian matrix of $f$, $U_0$: a starting position, $N$: maximal number of iterations, $\varepsilon$: precision.}
+    \KwResult{$U$: a root of $f$}
+    $U \leftarrow U_0$\\
+    tmp $\leftarrow 1$\\
+    \For{$i$ from $1$ to $N$}{
+      $V \leftarrow \text{solve}(f(U) + H(U).V = 0)$\\
+      \While{$\|f(U + \text{step}*V)\|> \|f(U)\|$}{$\text{step} \leftarrow \text{step}*2/3$}
+        $U \leftarrow U + \text{step}*V$\\
+        \If{$\|f(U)< \varepsilon\|$}
+          {return $U$}
+    }
+    return $U$\\
+  \end{algorithm}
+  \caption{Backtracking algorithm}
+  \label{fig:backtracking}
+\end{figure}
+ 
+\subsection{Tests}
+One way to easily test this method is to check if the point returned $U$ is a root of $f$. This can be done by computing $f(U)$. The next figures show the speed of...
+%Julien s'occupe de finaliser d'après ce qu'il m'a dit 

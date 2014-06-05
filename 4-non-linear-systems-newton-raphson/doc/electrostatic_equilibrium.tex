@@ -1,0 +1,36 @@
+%----------------------------------------------------------------------------------------
+%   ELECTROSTATIC EQUILIBRIUM
+%----------------------------------------------------------------------------------------
+
+\section{Electrostatic equilibrium}
+\subsection{Jacobian Matrix}
+Let us consider the interval $[-1, 1]$ and two electrostatic charges fixed at the positions $-1$ and $1$. We assume that there exists $N$ charges positioned at $x_1, x_2,..., x_N$ and that these charges can move freely in the interval $[-1, 1]$.
+
+Findind the positions that essen the amout energy of the charges means:
+\[\nabla E(x_1, x_2, ..., x_n) = \begin{pmatrix}\frac{\partial E(x_1,...,x_N)}{\partial x_i}\end{pmatrix}_{i \in [1,N]} = 0\]
+
+Noticing that : 
+\[\frac{\partial E(x_1,...,x_N)}{\partial x_i} = \frac{1}{x_i + 1} + \frac{1}{x_i - 1} +  \displaystyle\sum_{j=1,j\ne i}^{N}\frac{1}{(x_i - x_j)}\]
+
+Thus, the jacobian matrix of $\nabla E(x_1, x_2, ..., x_n)$ is defined as:
+\begin{center}
+  \fbox{
+    $J = \begin{pmatrix}\frac{\partial^2 E}{\partial x_i \partial x_j}\end{pmatrix}_{i\in [1,N], j\in[1,N]}$}
+\end{center}
+where 
+
+\[\begin{pmatrix}\frac{\partial^2 E}{\partial x_i \partial x_j}\end{pmatrix}  =  \left\{
+\begin{array}{ll}
+  \frac{1}{(x_i - x_j)^2} & \mbox {if $i\ne j$}\\
+  \frac{-1}{(x_i +1)^2 } - \frac{1}{(x_i - 1)^2 } - \displaystyle\sum_{j=1,j\ne i}^{N}\frac{1}{(x_i  - x_j)^2} & \mbox{else}
+\end{array}\right.\]
+
+\subsection{Equation solving}
+The Newton-Raphson method is applied in order to find the roots of non-linear equation system.
+
+The equilibrium positions are exactly the roots of successive derivatives of Legendre Polynomials, which are: 
+
+\begin{center}
+  \fbox{$P_n' = \frac{1}{2^n n!}\frac{d^{n+1}}{dx^{n+1}}((x^2 - 1 )^n)$}
+\end{center}
+%%Idéalement, il faudait ajouter un graphique qui compare les racines et les les polynomes de legendre et de même concernant l'étude de minimum et maximum
